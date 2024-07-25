@@ -12,10 +12,7 @@
             <a asp-area="" asp-controller="Category" asp-action="Create" class="btn btn-primary mb-2">
                 <i class="bi bi-plus-circle"></i> Create New Category
             </a>
-        </div>
-        <div>
-
-        </div>
+        </div>        
     </div>
 
 
@@ -30,7 +27,7 @@
 
         @foreach (var obj in Model)
         {
-            <tbody>
+            <tbody class="">
                 <tr>                   
                     <td>@obj.Name</td>
                     <td>@obj.CategoryOrder</td>
@@ -43,7 +40,7 @@
                                 <i class="bi bi-trash"></i> Delete
                             </a>
                         </div>
-                    </td>
+                    </td>                    
                 </tr>
             </tbody>
         }

@@ -1,4 +1,5 @@
-﻿using BulkyProject.Data;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using BulkyProject.Data;
 using BulkyProject.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -9,8 +10,10 @@ namespace BulkyProject.Controllers
     {
 
         private readonly ApplicationDBContext _db;
-        public CategoryController(ApplicationDBContext db) {
-            _db = db;        
+        private readonly INotyfService _notyf;
+        public CategoryController(ApplicationDBContext db , INotyfService notyf) {
+            _db = db;     
+            _notyf = notyf;
         }
         public IActionResult Index()
         {
@@ -39,7 +42,9 @@ namespace BulkyProject.Controllers
             {
                 _db.Category.Add(obj);
                 _db.SaveChanges();
-                TempData["success"] = "Category created successfully.";
+                //TempData["success"] = "Category created successfully.";
+                _notyf.Success("Category created successfully.");
+                //_notyf.Success("Category created successfully.");
                 return RedirectToAction("Index");
             }
             return View();            
@@ -75,7 +80,8 @@ namespace BulkyProject.Controllers
             {
                 _db.Category.Update(obj);
                 _db.SaveChanges();
-                TempData["success"] = "Category updated successfully.";
+                //TempData["success"] = "Category updated successfully.";
+                _notyf.Success("Category updated successfully.");
                 return RedirectToAction("Index");
             }
             return View();
@@ -111,7 +117,8 @@ namespace BulkyProject.Controllers
         {
             _db.Category.Remove(obj);
             _db.SaveChanges();
-            TempData["success"] = "Category deleted successfully.";
+            //TempData["success"] = "Category deleted successfully.";
+            _notyf.Success("Category deleted successfully.");
             return RedirectToAction("Index");
         }
     }
